@@ -3,6 +3,9 @@ server{
     server_name <domain-or-ip> <domain2-if-any-or-more>;
     root <your-django-project-directory>;
 
+    location /static/ {
+    }
+
     location / {
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
