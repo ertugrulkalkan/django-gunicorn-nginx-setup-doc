@@ -1,0 +1,10 @@
+server{
+    listen <your-port>;
+    server_name <domain-or-ip> <domain2-if-any-or-more>;
+    root <your-django-project-directory>;
+
+    location / {
+        include proxy-params;
+        proxy-pass http://unix:/<your-django-project-directory>/<your-socket>.sock;
+    }
+}

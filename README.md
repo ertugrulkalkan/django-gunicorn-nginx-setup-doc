@@ -4,7 +4,7 @@ document and template files for publishing django app via nginx and gunicorn
 # Packages :
 get virtualenv
 
-    sudo apt install python3-virtualenv
+    sudo apt install python3-venv
 
 get pip
 
@@ -16,7 +16,7 @@ project directory.
 # Virtual Env. :
 create virtualenv in same directory with manage.py
 
-    python3 -m virtualenv venv
+    python3 -m venv venv
 
 in some cases when creating virtualenv you get error, then try this
 
@@ -35,16 +35,40 @@ activate virtual env.
 
     source venv/bin/activate
 
+check pip and python
+
+    which python
+
+should be .../venv/bin/python
+
+    python -V
+
+should be version 3.X
+
+    which pip
+
+should be .../venv/bin/python
+
+upgrade pip
+
+    pip install --upgrade pip
+
+check version
+
+    pip -V
+
+should be 20.X or later
+
 get required python packages to virtual env.
 
-    pip3 install -r requirements.txt
+    pip install -r requirements.txt
 
 to test django project
 
-    python3 manage.py makemigrations
-    python3 manage.py migrate
-    python3 manage.py collectstatic
-    python3 manage.py runserver 0.0.0.0:8000
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py collectstatic
+    python manage.py runserver 0.0.0.0:8000
 
 maybe you will need
 
@@ -76,3 +100,30 @@ activate it
 be sure it works
 
     sudo systemctl status gunicorn
+
+# Nginx :
+get nginx
+
+    sudo apt install nginx
+
+configure your nginx for your socket, you can edit site-name file and copy it.
+
+    cp [path of this directory]/site-name /etc/nginx/sites-available/[site-name]
+
+link the nginx site file to enable path
+
+    sudo ln -s /etc/nginx/sites-available/[site-name] /etc/nginx/sites-enable
+
+test any syntax error on nginx site file
+
+    sudo nginx -t
+
+restart nginx
+
+    sudo systemctl restart nginx
+
+open your ports for nginx if required
+
+    sudo ufw allow 'Nginx Full'
+
+done...
