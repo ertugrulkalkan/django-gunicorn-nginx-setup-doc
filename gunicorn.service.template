@@ -1,0 +1,9 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=<your-user-name>
+Group=www-data
+WorkingDirectory=<your-django-project-dirertory>
+ExecStart=<your-django-project-dirertory>/venv/bin/gunicorn --access-logfile - --workers <your-prefered-worker-count> --bind unix:/<your-django-project-dirertory>/<you-django-project-name>.sock <you-django-project-name>.wsgi:application
